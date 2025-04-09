@@ -1,0 +1,14 @@
+<form [formGroup]="empleadoForm" (ngSubmit)="registrar()" class="formulario-empleado">
+    <div class="form-grid">
+      <div class="form-campo" *ngFor="let campo of ordenCampos">
+        <label>{{ campo | titlecase }}:</label>
+        <input
+          [type]="campo === 'fechaIngreso' ? 'date' : campo === 'salario' || campo === 'edad' ? 'number' : 'text'"
+          [formControlName]="campo"
+          required
+        />
+      </div>
+    </div>
+    <button type="submit" [disabled]="empleadoForm.invalid">Confirmar</button>
+  </form>
+  
