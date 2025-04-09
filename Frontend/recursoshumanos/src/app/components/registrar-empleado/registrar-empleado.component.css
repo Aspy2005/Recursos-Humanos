@@ -1,0 +1,72 @@
+/* Contenedor principal del formulario */
+.formulario-empleado {
+    max-width: 950px;
+    margin: 30px auto;
+    padding: 30px;
+    border: 1px solid #888;
+    background-color: #fdfdfd;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  /* Título del formulario */
+  .formulario-empleado::before {
+    content: "Registrar empleado";
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #222;
+  }
+  
+  /* Grilla de campos */
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 80px;
+    row-gap: 20px;
+    padding: 0 20px;
+  }
+  
+  /* Campo individual */
+  .form-campo {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Etiquetas */
+  .form-campo label {
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  
+  /* Inputs */
+  .form-campo input {
+    padding: 6px 10px;
+    border-radius: 2px;
+    border: 1px solid #999;
+    font-size: 14px;
+  }
+  
+  /* Botón */
+  button[type="submit"] {
+    margin: 30px auto 0 auto;
+    display: block;
+    padding: 8px 24px;
+    background-color: #803939;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #692f2f;
+  }
+  
+  
+  
