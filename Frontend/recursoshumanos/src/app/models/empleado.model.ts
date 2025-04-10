@@ -1,15 +1,15 @@
 export interface Empleado {
-    cedula: string;
+    cedulaEmpleado: string;
     nombre: string;
     apellido: string;
-    correo: string;
     telefono: string;
     direccion: string;
-    fechaIngreso: string; // Usaremos string por simplicidad con el input date
+    fechaIngreso: string;
     edad: number;
     cargo: string;
-    turno_trabajo: string;
-    residencia: string;
+    turnoTrabajo: string;
+    correo: string;
+    ciudad: string;
     salario: number;
   }
   

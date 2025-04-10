@@ -1,5 +1,5 @@
 package com.example.demo.controlador;
 
-public class CoordinadoraControlador {
+public class PersonalRHControlador {
 
 }
