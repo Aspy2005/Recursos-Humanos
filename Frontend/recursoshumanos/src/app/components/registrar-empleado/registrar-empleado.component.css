@@ -68,5 +68,8 @@
     background-color: #692f2f;
   }
   
-  
+  button[type="submit"]:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
   

@@ -15,25 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
 export class RegistrarEmpleadoComponent {
   empleadoForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private empleadoService: EmpleadoService) {
-    this.empleadoForm = this.fb.group({
-      cedula: ['', Validators.required],
-      nombre: ['', Validators.required],
-      apellido: ['', Validators.required],
-      correo: ['', [Validators.required, Validators.email]],
-      telefono: ['', Validators.required],
-      direccion: ['', Validators.required],
-      fechaIngreso: ['', Validators.required],
-      edad: ['', Validators.required],
-      cargo: ['', Validators.required],
-      turno_trabajo: ['', Validators.required],
-      residencia: ['', Validators.required],
-      salario: ['', Validators.required]
-    });
-  }
-
   ordenCampos: string[] = [
-    'cedula',
+    'cedulaEmpleado',
     'nombre',
     'apellido',
     'correo',
@@ -42,17 +25,51 @@ export class RegistrarEmpleadoComponent {
     'fechaIngreso',
     'edad',
     'cargo',
-    'turno_trabajo',
-    'residencia',
+    'turnoTrabajo',
+    'ciudad',
     'salario'
   ];
-  
-  
+
+  etiquetas: { [key: string]: string } = {
+    cedulaEmpleado: 'Cédula',
+    nombre: 'Nombre',
+    apellido: 'Apellido',
+    correo: 'Correo electrónico',
+    telefono: 'Teléfono',
+    direccion: 'Dirección',
+    fechaIngreso: 'Fecha de ingreso',
+    edad: 'Edad',
+    cargo: 'Cargo',
+    turnoTrabajo: 'Turno de trabajo',
+    ciudad: 'Ciudad de residencia',
+    salario: 'Salario'
+  };
+
+  turnos: string[] = ['Mañana', 'Tarde', 'Noche', 'Rotativo'];
+
+  constructor(private fb: FormBuilder, private empleadoService: EmpleadoService) {
+    this.empleadoForm = this.fb.group({
+      cedulaEmpleado: ['', [Validators.required, Validators.pattern(/^\d+$/)]], // Solo números
+      nombre: ['', Validators.required],
+      apellido: ['', Validators.required],
+      correo: ['', [Validators.required, Validators.email]],
+      telefono: ['', [Validators.required, Validators.pattern(/^\d{7,15}$/)]], // Solo números, 7 a 15 dígitos
+      direccion: ['', Validators.required],
+      fechaIngreso: ['', Validators.required],
+      edad: ['', [Validators.required, Validators.min(18), Validators.max(65)]],
+      cargo: ['', Validators.required],
+      turnoTrabajo: ['', Validators.required],
+      ciudad: ['', Validators.required],
+      salario: ['', [Validators.required, Validators.min(0)]] // No negativo
+    });
+    
+  }
+
   registrar() {
     if (this.empleadoForm.valid) {
       const empleado: Empleado = this.empleadoForm.value;
       this.empleadoService.registrarEmpleado(empleado).subscribe({
-        next: (res) => {
+        next: () => {
           alert('Empleado registrado exitosamente');
           this.empleadoForm.reset();
         },
@@ -61,5 +78,9 @@ export class RegistrarEmpleadoComponent {
         }
       });
     }
+  }
+
+  getControl(campo: string) {
+    return this.empleadoForm.get(campo);
   }
 }
