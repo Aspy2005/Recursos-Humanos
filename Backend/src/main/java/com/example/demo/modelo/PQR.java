@@ -1,13 +1,14 @@
 package com.example.demo.modelo;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.*;
 
 @Entity
 public class PQR {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pqr")
-    @SequenceGenerator(name = "seq_pqr", sequenceName = "seq_pqr", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_pqr")
     private Integer idPqr;
 
@@ -20,18 +21,22 @@ public class PQR {
 
     @Column(name = "descripcion", columnDefinition = "TEXT")
     private String descripcion;
+    
+    @Column(name = "fecha")
+    private LocalDate fecha;
 
 
     public PQR() {
 		super();
 	}
 
-	public PQR(Integer idPqr, Empleado empleado, String tipo, String descripcion) {
+	public PQR(Integer idPqr, Empleado empleado, String tipo, String descripcion, LocalDate fecha) {
 		super();
 		this.idPqr = idPqr;
 		this.empleado = empleado;
 		this.tipo = tipo;
 		this.descripcion = descripcion;
+		this.fecha = fecha;
 	}
 
 	public Integer getIdPqr() {
@@ -65,4 +70,12 @@ public class PQR {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+	public LocalDate getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(LocalDate fecha) {
+		this.fecha = fecha;
+	}
 }

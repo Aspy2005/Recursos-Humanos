@@ -1,0 +1,19 @@
+<div class="contenedor-principal">
+    <h3>Gestión de permisos</h3>
+    <div class="contenedor-lista">
+      <div *ngFor="let permiso of permisos" class="permiso-card">
+        <p><strong>Nombre:</strong> {{ permiso.empleado.nombre }}</p>
+        <p><strong>Fecha inicio:</strong> {{ permiso.fechaInicio }}</p>
+        <p><strong>Fecha fin:</strong> {{ permiso.fechaFin }}</p>
+        <p><strong>Identificación:</strong> {{ permiso.empleado.cedulaEmpleado }}</p>
+        <p><strong>Motivo:</strong> {{ permiso.motivo }}</p>
+        <p><strong>Observaciones:</strong> {{ permiso.observaciones }}</p>
+        <p><strong>Estado:</strong> {{ permiso.estado }}</p>
+        <div class="botones">
+          <button class="btn-aprobar" (click)="cambiarEstado(permiso.idPermiso, 'Aprobado')">Aceptar</button>
+          <button class="btn-rechazar" (click)="cambiarEstado(permiso.idPermiso, 'Rechazado')">Rechazar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

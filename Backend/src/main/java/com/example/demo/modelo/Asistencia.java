@@ -8,8 +8,7 @@ import java.time.LocalTime;
 public class Asistencia {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_asistencia")
-    @SequenceGenerator(name = "seq_asistencia", sequenceName = "seq_asistencia", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_asistencia")
     private Integer idAsistencia;
 

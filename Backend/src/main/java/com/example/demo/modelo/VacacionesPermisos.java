@@ -7,8 +7,7 @@ import jakarta.persistence.*;
 public class VacacionesPermisos {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_permiso")
-    @SequenceGenerator(name = "seq_permiso", sequenceName = "seq_permiso", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_permiso")
     private Integer idPermiso;
 

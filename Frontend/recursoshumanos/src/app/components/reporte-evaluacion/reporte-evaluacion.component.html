@@ -1,0 +1,96 @@
+<!-- Lista de empleados, solo visible si no hay uno seleccionado -->
+<div class="empleados-container" *ngIf="!empleadoSeleccionado">
+  <h2>Evaluación de empleado</h2>
+  <div *ngFor="let empleado of empleadosConRegistros" class="empleado-card">
+    <div class="empleado-info">
+      <p><strong>Identificación:</strong> {{ empleado.cedulaEmpleado }}</p>
+      <p><strong>Nombre:</strong> {{ empleado.nombre }}</p>
+    </div>
+    <button class="seleccionar-btn" (click)="seleccionarEmpleado(empleado)">Seleccionar</button>
+  </div>
+</div>
+
+
+<!-- Panel de Evaluación -->
+<div class="empleado-evaluacion" *ngIf="empleadoSeleccionado">
+  <button class="volver-btn" (click)="empleadoSeleccionado = null">← Cambiar de Empleado</button>
+
+  <h3>Evaluación de {{ empleadoSeleccionado.nombre }}</h3>
+  <p><strong>Fecha de Evaluación:</strong> {{ today | date }}</p>
+
+  <!-- Datos del empleado -->
+  <div class="empleado-info">
+    <p><strong>Datos del Empleado Evaluado:</strong></p>
+    <p><strong>Nombre:</strong> {{ empleadoSeleccionado.nombre }}</p>
+    <p><strong>ID del Empleado:</strong> {{ empleadoSeleccionado.cedulaEmpleado }}</p>
+    <p><strong>Resumen de Datos Analizados:</strong></p>
+  </div>
+
+  <!-- Asistencia -->
+  <p><strong>Últimos 5 Registros de Asistencia:</strong></p>
+  <ul *ngIf="asistencia.length > 0">
+    <li *ngFor="let record of asistencia">
+      {{ record.fecha | date: 'dd/MM/yyyy' }} - Entrada: {{ record.horaEntrada }} | Salida: {{ record.horaSalida }}
+    </li>
+  </ul>
+  <p *ngIf="asistencia.length === 0">No hay registros de asistencia disponibles.</p>
+
+  <!-- PQR -->
+  <p><strong>Últimos 5 PQR:</strong></p>
+  <ul *ngIf="pqr.length > 0">
+    <li *ngFor="let record of pqr">
+      {{ record.fecha | date: 'dd/MM/yyyy' }} - {{ record.descripcion }}
+    </li>
+  </ul>
+  <p *ngIf="pqr.length === 0">No hay registros de PQR disponibles.</p>
+
+  <!-- Formulario -->
+  <form [formGroup]="evaluacionForm" (ngSubmit)="enviarEvaluacion()">
+    <div>
+      <label>Calificación Asistencia (1-5):</label>
+      <div class="rating-group">
+        <label *ngFor="let n of [1,2,3,4,5]">
+          <input
+            type="radio"
+            [value]="n"
+            formControlName="asistencia"
+            name="asistencia"
+          />
+          {{ n }}
+        </label>
+      </div>
+    </div>
+
+    <div>
+      <label>Calificación PQR (1-5):</label>
+      <div class="rating-group">
+        <label *ngFor="let n of [1,2,3,4,5]">
+          <input
+            type="radio"
+            [value]="n"
+            formControlName="pqr"
+            name="pqr"
+          />
+          {{ n }}
+        </label>
+      </div>
+    </div>
+
+    <div>
+      <label for="observaciones">Observaciones:</label>
+      <textarea id="observaciones" formControlName="observaciones"></textarea>
+    </div>
+
+    <button type="submit" [disabled]="evaluacionForm.invalid">Guardar Evaluación</button>
+  </form>
+</div>
+
+<!-- No hay datos suficientes -->
+<div *ngIf="asistencia.length === 0 && pqr.length === 0 && empleadoSeleccionado">
+  <p>No hay datos suficientes para evaluar este empleado.</p>
+</div>
+
+<!-- Cargando empleados -->
+<div *ngIf="empleadosConRegistros.length === 0 && !empleadoSeleccionado">
+  <p>Cargando empleados...</p>
+</div>
