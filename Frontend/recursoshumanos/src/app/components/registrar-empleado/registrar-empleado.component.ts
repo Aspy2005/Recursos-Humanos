@@ -4,6 +4,7 @@ import { EmpleadoService } from '../../services/empleado.service';
 import { Empleado } from '../../models/empleado.model';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { cedulaUnicaValidator } from '../../validators/cedula-unica.validator';
 
 @Component({
   selector: 'app-registrar-empleado',
@@ -49,7 +50,10 @@ export class RegistrarEmpleadoComponent {
 
   constructor(private fb: FormBuilder, private empleadoService: EmpleadoService) {
     this.empleadoForm = this.fb.group({
-      cedulaEmpleado: ['', [Validators.required, Validators.pattern(/^\d+$/)]], // Solo números
+      cedulaEmpleado: ['', 
+        [Validators.required, Validators.pattern(/^\d+$/)], // Solo números
+        [cedulaUnicaValidator(empleadoService)] // Agregar el validador asíncrono
+      ],
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       correo: ['', [Validators.required, Validators.email]],
@@ -62,15 +66,16 @@ export class RegistrarEmpleadoComponent {
       ciudad: ['', Validators.required],
       salario: ['', [Validators.required, Validators.min(0)]] // No negativo
     });
-    
   }
+
+
 
   registrar() {
     if (this.empleadoForm.valid) {
       const empleado: Empleado = this.empleadoForm.value;
       this.empleadoService.registrarEmpleado(empleado).subscribe({
         next: () => {
-          alert('Empleado registrado exitosamente');
+          alert('Empleado registrado.');
           this.empleadoForm.reset();
         },
         error: (err) => {

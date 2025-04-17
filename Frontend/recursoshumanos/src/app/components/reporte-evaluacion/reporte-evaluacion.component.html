@@ -1,3 +1,10 @@
+<div class="main-container">
+<nav>
+  <div class="nav-item">Clínica</div>
+  <div class="nav-item">Evaluación de empleado</div>
+</nav>
+<main class="contenido">
+
 <!-- Lista de empleados, solo visible si no hay uno seleccionado -->
 <div class="empleados-container" *ngIf="!empleadoSeleccionado">
   <h2>Evaluación de empleado</h2>
@@ -93,4 +100,10 @@
 <!-- Cargando empleados -->
 <div *ngIf="empleadosConRegistros.length === 0 && !empleadoSeleccionado">
   <p>Cargando empleados...</p>
+</div>
+
+</main>
+<footer class="footer">
+  ClínicaApp - Sistema de Gestión de recursos humanos
+</footer>
 </div>

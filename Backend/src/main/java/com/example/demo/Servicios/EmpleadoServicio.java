@@ -21,5 +21,10 @@ public class EmpleadoServicio {
         return empleados.stream()
                         .map(empleado -> new DetallesEmpleadoDTO(empleado, null, null)) // Aquí falta asistencia y pqr
                         .collect(Collectors.toList());
-    }	
+    }
+    
+    public boolean validarCedula(String cedula) {
+        // Verificar si existe un empleado con la cédula proporcionada
+        return empleadoRepositorio.existsByCedulaEmpleado(cedula);
+    }
 }

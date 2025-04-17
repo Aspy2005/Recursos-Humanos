@@ -1,0 +1,14 @@
+nav {
+    background-color: #141E54;
+    color: white;
+    margin: 0;
+    padding: 1rem;
+    display: flex;
+    gap: 2rem;
+    font-weight: bold;
+    width: 100%; /* <-- corregido */
+  }
+  .nav-item {
+    cursor: pointer;
+  }
+  

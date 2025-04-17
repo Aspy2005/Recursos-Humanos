@@ -1,42 +1,50 @@
-<form [formGroup]="empleadoForm" (ngSubmit)="registrar()" class="formulario-empleado">
-    <div class="form-grid">
-      <div class="form-campo" *ngFor="let campo of ordenCampos">
-        <label>{{ etiquetas[campo] }}:</label>
-  
-        <ng-container [ngSwitch]="campo">
-  
-          <!-- Turno (select) -->
-          <select *ngSwitchCase="'turnoTrabajo'" [formControlName]="campo">
-            <option value="" disabled>Seleccione un turno</option>
-            <option *ngFor="let turno of turnos" [value]="turno">{{ turno }}</option>
-          </select>
-  
-          <!-- Fecha -->
-          <input *ngSwitchCase="'fechaIngreso'" type="date" [formControlName]="campo" />
-  
-          <!-- Numéricos -->
-          <input *ngSwitchCase="'edad'" type="number" [formControlName]="campo" />
-          <input *ngSwitchCase="'salario'" type="number" [formControlName]="campo" />
-          <input *ngSwitchCase="'cedulaEmpleado'" type="number" [formControlName]="campo" />
-          <input *ngSwitchCase="'telefono'" type="number" [formControlName]="campo" />
-  
-          <!-- Resto: texto -->
-          <input *ngSwitchDefault type="text" [formControlName]="campo" />
-        </ng-container>
-  
-        <!-- Mensajes de error -->
-        <div *ngIf="getControl(campo)?.invalid && getControl(campo)?.touched" class="error-msg">
-          <small *ngIf="getControl(campo)?.errors?.['required']">Este campo es obligatorio.</small>
-          <small *ngIf="campo === 'correo' && getControl(campo)?.errors?.['email']">Correo inválido.</small>
-          <small *ngIf="campo === 'telefono' && getControl(campo)?.errors?.['pattern']">Solo se permiten números (7 a 15 dígitos).</small>
-          <small *ngIf="campo === 'cedulaEmpleado' && getControl(campo)?.errors?.['pattern']">Solo se permiten números.</small>
-          <small *ngIf="campo === 'edad' && getControl(campo)?.errors?.['min']">Edad mínima: 18 años.</small>
-          <small *ngIf="campo === 'edad' && getControl(campo)?.errors?.['max']">Edad máxima: 65 años.</small>
-          <small *ngIf="campo === 'salario' && getControl(campo)?.errors?.['min']">El salario no puede ser negativo.</small>
+<div class="main-container">
+  <nav>
+    <div class="nav-item">Clínica</div>
+    <div class="nav-item">Registro de Empleado</div>
+  </nav>
+  <main class="contenido">
+    <form [formGroup]="empleadoForm" (ngSubmit)="registrar()" class="formulario-empleado">
+      <div class="form-grid">
+        <div class="form-campo" *ngFor="let campo of ordenCampos">
+          <label>{{ etiquetas[campo] }}:</label>
+
+          <ng-container [ngSwitch]="campo">
+            <select *ngSwitchCase="'turnoTrabajo'" [formControlName]="campo">
+              <option value="" disabled>Seleccione un turno</option>
+              <option *ngFor="let turno of turnos" [value]="turno">{{ turno }}</option>
+            </select>
+
+            <input *ngSwitchCase="'fechaIngreso'" type="date" [formControlName]="campo" />
+            <input *ngSwitchCase="'edad'" type="number" [formControlName]="campo" />
+            <input *ngSwitchCase="'salario'" type="number" [formControlName]="campo" />
+            <input *ngSwitchCase="'cedulaEmpleado'" type="number" [formControlName]="campo" />
+            <input *ngSwitchCase="'telefono'" type="number" [formControlName]="campo" />
+            <input *ngSwitchDefault type="text" [formControlName]="campo" />
+          </ng-container>
+
+          <!-- Mensajes de error -->
+          <div *ngIf="getControl(campo)?.invalid && getControl(campo)?.touched" class="error-msg">
+            <small *ngIf="getControl(campo)?.errors?.['required']">Este campo es obligatorio.</small>
+            <small *ngIf="campo === 'correo' && getControl(campo)?.errors?.['email']">Correo inválido.</small>
+            <small *ngIf="campo === 'telefono' && getControl(campo)?.errors?.['pattern']">Solo se permiten números (7 a 15 dígitos).</small>
+            <small *ngIf="campo === 'cedulaEmpleado' && getControl(campo)?.errors?.['pattern']">Solo se permiten números.</small>
+            <small *ngIf="campo === 'edad' && getControl(campo)?.errors?.['min']">Edad mínima: 18 años.</small>
+            <small *ngIf="campo === 'edad' && getControl(campo)?.errors?.['max']">Edad máxima: 65 años.</small>
+            <small *ngIf="campo === 'salario' && getControl(campo)?.errors?.['min']">El salario no puede ser negativo.</small>
+
+            <!-- Error de cédula ya existente -->
+            <small *ngIf="campo === 'cedulaEmpleado' && getControl(campo)?.errors?.['cedulaUnica']">
+              El empleado ya existe en el sistema            </small>
+          </div>
         </div>
       </div>
-    </div>
-  
-    <button type="submit" [disabled]="empleadoForm.invalid">Confirmar</button>
-  </form>
-  
+
+      <button type="submit" [disabled]="empleadoForm.invalid">Confirmar</button>
+    </form>
+  </main>
+
+  <footer class="footer">
+    ClínicaApp - Sistema de Gestión de recursos humanos
+  </footer>
+</div>
