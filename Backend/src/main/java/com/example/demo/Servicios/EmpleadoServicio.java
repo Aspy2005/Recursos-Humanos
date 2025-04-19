@@ -27,4 +27,29 @@ public class EmpleadoServicio {
         // Verificar si existe un empleado con la cédula proporcionada
         return empleadoRepositorio.existsByCedulaEmpleado(cedula);
     }
+    
+    public Empleado actualizarEmpleado(Empleado empleado) throws Exception {
+        Empleado empleadoExistente = empleadoRepositorio.findByCedulaEmpleado(empleado.getCedulaEmpleado());
+        
+        if (empleadoExistente == null) {
+            throw new Exception("Empleado no encontrado");
+        }
+
+        // Actualiza los campos permitidos
+        if (empleado.getDireccion() != null) {
+            empleadoExistente.setDireccion(empleado.getDireccion());
+        }
+        if (empleado.getTelefono() != null) {
+            empleadoExistente.setTelefono(empleado.getTelefono());
+        }
+        if (empleado.getCorreo() != null) {
+            empleadoExistente.setCorreo(empleado.getCorreo());
+        }
+        if (empleado.getCiudad() != null) {
+            empleadoExistente.setCiudad(empleado.getCiudad());
+        }
+
+        // Guarda y retorna el empleado actualizado
+        return empleadoRepositorio.save(empleadoExistente);
+    }
 }

@@ -13,4 +13,6 @@ public interface EmpleadoRepositorio extends JpaRepository<Empleado, String> {
 	
     boolean existsByCedulaEmpleado(String cedulaEmpleado);
 
+    Empleado findByCedulaEmpleado(String cedulaEmpleado);
+
 }

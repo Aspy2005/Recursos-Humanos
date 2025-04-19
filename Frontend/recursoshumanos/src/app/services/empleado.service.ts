@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Empleado } from '../models/empleado.model';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators'; // Agregar catchError desde rxjs
+import { RegistroEmpleadoResponse } from '../interfaces/registro-empleado-response';
 
 
 @Injectable({
@@ -13,8 +14,8 @@ export class EmpleadoService {
 
   constructor(private http: HttpClient) {}
 
-  registrarEmpleado(empleado: Empleado): Observable<Empleado> {
-    return this.http.post<Empleado>(`${this.apiUrl}/empleado/registrar`, empleado);
+  registrarEmpleado(empleado: Empleado): Observable<RegistroEmpleadoResponse> {  // Cambiado a RegistroEmpleadoResponse
+    return this.http.post<RegistroEmpleadoResponse>(`${this.apiUrl}/empleado/registrar`, empleado);
   }
 
   // 🚀 Obtener empleados con registros de asistencia o PQR
@@ -32,6 +33,4 @@ export class EmpleadoService {
       })
     );
   }
-  
-  
 }

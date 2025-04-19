@@ -1,0 +1,41 @@
+.formulario-actualizacion {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  .formulario-actualizacion h2 {
+    margin-bottom: 20px;
+    color: #141E54;
+  }
+  
+  .formulario-actualizacion label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+  }
+  
+  .formulario-actualizacion input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .formulario-actualizacion button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    background-color: #803939;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  

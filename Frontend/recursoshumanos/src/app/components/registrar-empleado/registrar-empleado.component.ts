@@ -5,6 +5,8 @@ import { Empleado } from '../../models/empleado.model';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { cedulaUnicaValidator } from '../../validators/cedula-unica.validator';
+import { RegistroEmpleadoResponse } from '../../interfaces/registro-empleado-response';
+
 
 @Component({
   selector: 'app-registrar-empleado',
@@ -68,14 +70,23 @@ export class RegistrarEmpleadoComponent {
     });
   }
 
+  generarContrasena(longitud: number): string {
+    const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-+=<>?';
+    let contrasena = '';
+    for (let i = 0; i < longitud; i++) {
+      const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
+      contrasena += caracteres.charAt(indiceAleatorio);
+    }
+    return contrasena;
+  }
 
 
   registrar() {
     if (this.empleadoForm.valid) {
       const empleado: Empleado = this.empleadoForm.value;
       this.empleadoService.registrarEmpleado(empleado).subscribe({
-        next: () => {
-          alert('Empleado registrado.');
+        next: (response: RegistroEmpleadoResponse) => {
+          alert(response.message);  // Mostrar el mensaje que viene en la respuesta
           this.empleadoForm.reset();
         },
         error: (err) => {
@@ -84,6 +95,9 @@ export class RegistrarEmpleadoComponent {
       });
     }
   }
+  
+  
+  
 
   getControl(campo: string) {
     return this.empleadoForm.get(campo);
