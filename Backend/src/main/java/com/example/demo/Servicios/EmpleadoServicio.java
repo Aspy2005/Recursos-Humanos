@@ -1,10 +1,14 @@
 package com.example.demo.Servicios;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.demo.DTO.DetallesEmpleadoDTO;
 import com.example.demo.Repositorio.EmpleadoRepositorio;
@@ -30,12 +34,12 @@ public class EmpleadoServicio {
     
     public Empleado actualizarEmpleado(Empleado empleado) throws Exception {
         Empleado empleadoExistente = empleadoRepositorio.findByCedulaEmpleado(empleado.getCedulaEmpleado());
-        
+
         if (empleadoExistente == null) {
             throw new Exception("Empleado no encontrado");
         }
 
-        // Actualiza los campos permitidos
+        // Actualiza solo los campos permitidos
         if (empleado.getDireccion() != null) {
             empleadoExistente.setDireccion(empleado.getDireccion());
         }
@@ -51,5 +55,15 @@ public class EmpleadoServicio {
 
         // Guarda y retorna el empleado actualizado
         return empleadoRepositorio.save(empleadoExistente);
+    }
+
+    public boolean eliminarEmpleado(String cedula) {
+        Optional<Empleado> empleado = empleadoRepositorio.findById(cedula);
+
+        if (empleado.isPresent()) {
+            empleadoRepositorio.deleteById(cedula);
+            return true;
+        }
+        return false;
     }
 }

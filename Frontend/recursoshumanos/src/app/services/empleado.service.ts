@@ -27,10 +27,25 @@ export class EmpleadoService {
     return this.http.get<boolean>(`${this.apiUrl}/empleado/validar-cedula/${cedula}`).pipe(
       catchError(error => {
         if (error.status === 409) { // Cédula ya existe
-          return of(true); // Retorna true para indicar que la cédula existe
+          return of(true); // Retorna true para indicar que la cédula existe  
         }
         return of(false); // En caso de error distinto, retorna false
       })
     );
+  }
+
+  obtenerEmpleadoPorCedula(cedula: string): Observable<Empleado> {
+    return this.http.get<Empleado>(`${this.apiUrl}/empleado/findByCedula/${cedula}`);
+  }
+  
+  
+
+  // Actualizar los datos del empleado
+  actualizarEmpleado(empleado: Empleado): Observable<Empleado> {
+    return this.http.put<Empleado>(`${this.apiUrl}/empleado/actualizar`, empleado);
+  }
+
+  eliminarEmpleado(cedula: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/delete/${cedula}`);
   }
 }

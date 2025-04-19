@@ -1,39 +1,63 @@
+import { EmpleadoService } from './../../services/empleado.service';
+import { Empleado } from '../../models/empleado.model';
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-actualizar-datos',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './actualizar-datos.component.html',
   styleUrls: ['./actualizar-datos.component.css']
 })
 export class ActualizarDatosComponent implements OnInit {
-  empleado: any = {};
-  cedula = '123456'; // Puedes reemplazar esto con el valor que obtengas del login
+  empleado: Empleado = {
+    cedulaEmpleado: '',
+    nombre: '',
+    apellido: '',
+    telefono: '',
+    direccion: '',
+    fechaIngreso: '',
+    edad: 0,
+    cargo: '',
+    turnoTrabajo: '',
+    correo: '',
+    ciudad: '',
+    salario: 0
+  };
 
-  constructor(private http: HttpClient) {}
+  constructor(private AuthService: AuthService, private EmpleadoService: EmpleadoService) { }
 
   ngOnInit(): void {
-    this.obtenerDatosEmpleado();
-  }
+    // Obtener la cédula del usuario logueado desde el AuthService
+    const cedula = this.AuthService.getCedula();
 
-  obtenerDatosEmpleado() {
-    this.http.get<any>(`http://localhost:8080/empleados/${this.cedula}`)
-      .subscribe(data => this.empleado = data);
+    if (cedula) {
+      // Solicitar los datos del empleado desde el backend usando la cédula
+      this.EmpleadoService.obtenerEmpleadoPorCedula(cedula).subscribe((empleadoData) => {
+        this.empleado = empleadoData; // Llenar el formulario con los datos del empleado
+      });
+    }
   }
+  actualizado: boolean = false;
 
-  actualizarDatos() {
-    const datosActualizados = {
-      direccion: this.empleado.direccion,
-      ciudad: this.empleado.ciudad,
-      telefono: this.empleado.telefono,
-      correo: this.empleado.correo
-    };
+actualizarEmpleado() {
+  this.EmpleadoService.actualizarEmpleado(this.empleado).subscribe({
+    next: () => {
+      this.actualizado = true;
 
-    this.http.put(`http://localhost:8080/empleados/${this.cedula}`, datosActualizados)
-      .subscribe(() => alert('Datos actualizados correctamente'));
-  }
+      // Opcional: ocultar el mensaje después de 5 segundos
+      setTimeout(() => {
+        this.actualizado = false;
+      }, 5000);
+    },
+    error: (err) => {
+      console.error('Error al actualizar', err);
+      this.actualizado = false;
+    }
+  });
+}
+
 }

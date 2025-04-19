@@ -1,44 +1,108 @@
-<div class="formulario-actualizacion">
-    <h2>Actualizar Datos Personales</h2>
-    <form (ngSubmit)="actualizarDatos()">
-      <label>Cédula:</label>
-      <input type="text" [value]="empleado.cedulaEmpleado" disabled>
-  
-      <label>Nombre:</label>
-      <input type="text" [value]="empleado.nombre" disabled>
-  
-      <label>Apellido:</label>
-      <input type="text" [value]="empleado.apellido" disabled>
-  
-      <label>Edad:</label>
-      <input type="number" [value]="empleado.edad" disabled>
-  
-      <label>Cargo:</label>
-      <input type="text" [value]="empleado.cargo" disabled>
-  
-      <label>Turno de trabajo:</label>
-      <input type="text" [value]="empleado.turnoTrabajo" disabled>
-  
-      <label>Fecha de ingreso:</label>
-      <input type="date" [value]="empleado.fechaIngreso" disabled>
-  
-      <label>Salario:</label>
-      <input type="number" [value]="empleado.salario" disabled>
-  
-      <!-- Campos que sí puede modificar -->
-      <label>Dirección:</label>
-      <input type="text" [(ngModel)]="empleado.direccion" name="direccion">
-  
-      <label>Ciudad:</label>
-      <input type="text" [(ngModel)]="empleado.ciudad" name="ciudad">
-  
-      <label>Teléfono:</label>
-      <input type="text" [(ngModel)]="empleado.telefono" name="telefono">
-  
-      <label>Correo:</label>
-      <input type="email" [(ngModel)]="empleado.correo" name="correo">
-  
-      <button type="submit">Actualizar</button>
+<div class="main-container">
+  <nav>
+    <div class="nav-item">Clínica</div>
+    <div class="nav-item">Actualizar Datos</div>
+  </nav>
+
+  <main class="contenido">
+    <form (ngSubmit)="actualizarEmpleado()" class="formulario-empleado" #empleadoForm="ngForm">
+      <div class="form-grid">
+        <!-- Campos no editables -->
+        <div class="form-campo">
+          <label for="cedula">Cédula:</label>
+          <input type="text" id="cedula" [value]="empleado.cedulaEmpleado" disabled />
+        </div>
+
+        <div class="form-campo">
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" [value]="empleado.nombre" disabled />
+        </div>
+
+        <div class="form-campo">
+          <label for="apellido">Apellido:</label>
+          <input type="text" id="apellido" [value]="empleado.apellido" disabled />
+        </div>
+
+        <div class="form-campo">
+          <label for="fechaIngreso">Fecha de Ingreso:</label>
+          <input type="text" id="fechaIngreso" [value]="empleado.fechaIngreso" disabled />
+        </div>
+
+        <div class="form-campo">
+          <label for="edad">Edad:</label>
+          <input type="number" id="edad" [value]="empleado.edad" disabled />
+        </div>
+
+        <div class="form-campo">
+          <label for="cargo">Cargo:</label>
+          <input type="text" id="cargo" [value]="empleado.cargo" disabled />
+        </div>
+
+        <div class="form-campo">
+          <label for="turnoTrabajo">Turno de Trabajo:</label>
+          <input type="text" id="turnoTrabajo" [value]="empleado.turnoTrabajo" disabled />
+        </div>
+
+        <div class="form-campo">
+          <label for="salario">Salario:</label>
+          <input type="number" id="salario" [value]="empleado.salario" disabled />
+        </div>
+
+        <!-- Campos editables al final -->
+
+        <div class="form-campo">
+          <label for="telefono">Teléfono:</label>
+          <input
+            type="text"
+            id="telefono"
+            name="telefono"
+            [(ngModel)]="empleado.telefono"
+            required
+            pattern="^[0-9]{7,15}$"
+            #telefono="ngModel"
+          />
+          <div *ngIf="telefono.invalid && telefono.touched" class="error-msg">
+            <small *ngIf="telefono.errors?.['required']">Teléfono obligatorio.</small>
+            <small *ngIf="telefono.errors?.['pattern']">Solo números (7 a 15 dígitos).</small>
+          </div>
+        </div>
+
+        <div class="form-campo">
+          <label for="direccion">Dirección:</label>
+          <input type="text" id="direccion" [(ngModel)]="empleado.direccion" name="direccion" required />
+        </div>
+
+        <div class="form-campo">
+          <label for="ciudad">Ciudad:</label>
+          <input type="text" id="ciudad" [(ngModel)]="empleado.ciudad" name="ciudad" required />
+        </div>
+
+        <div class="form-campo">
+          <label for="correo">Correo:</label>
+          <input
+            type="email"
+            id="correo"
+            name="correo"
+            [(ngModel)]="empleado.correo"
+            required
+            email
+            #correo="ngModel"
+          />
+          <div *ngIf="correo.invalid && correo.touched" class="error-msg">
+            <small *ngIf="correo.errors?.['required']">Correo obligatorio.</small>
+            <small *ngIf="correo.errors?.['email']">Correo inválido.</small>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="empleadoForm.invalid">Actualizar</button>
+      <div *ngIf="actualizado" class="mensaje-exito">
+        Información actualizada con éxito.
+      </div>
     </form>
-  </div>
-  
+  </main>
+
+  <footer class="footer">
+    ClínicaApp - Sistema de Gestión de recursos humanos
+  </footer>
+</div>

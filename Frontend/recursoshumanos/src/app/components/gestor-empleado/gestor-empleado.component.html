@@ -1,0 +1,111 @@
+<div class="main-container"> 
+  <nav>
+    <div class="nav-item">Clínica</div>
+    <div class="nav-item">Gestor de Empleados</div>
+  </nav>
+
+  <main class="contenido">
+    <div class="formulario-empleado">
+      <form [formGroup]="empleadoForm" (ngSubmit)="buscarEmpleado()">
+        <div class="form-campo">
+          <label for="cedulaBuscar">Buscar por Cédula:</label>
+          <input type="text" id="cedulaBuscar" formControlName="cedulaBuscar" required pattern="[0-9]+">
+        </div>
+        <button type="submit" [disabled]="!empleadoForm.get('cedulaBuscar')?.valid">Buscar</button>
+      </form>
+<br>
+      <div *ngIf="empleadoEncontrado">
+        <h3>Empleado encontrado</h3>
+        <br>
+        <form [formGroup]="empleadoForm" (ngSubmit)="actualizarEmpleado()">
+          <div class="form-campo">
+            <label>Nombre:</label>
+            <input type="text" formControlName="nombre" required>
+            <div *ngIf="getControl('nombre')?.invalid && getControl('nombre')?.touched" class="error-msg">
+              <small *ngIf="getControl('nombre')?.hasError('required')">Este campo es obligatorio.</small>
+            </div>
+          </div>
+
+          <div class="form-campo">
+            <label>Apellido:</label>
+            <input type="text" formControlName="apellido" required>
+            <div *ngIf="getControl('apellido')?.invalid && getControl('apellido')?.touched" class="error-msg">
+              <small *ngIf="getControl('apellido')?.hasError('required')">Este campo es obligatorio.</small>
+            </div>
+          </div>
+
+          <div class="form-campo">
+            <label>Correo:</label>
+            <input type="email" formControlName="correo" required>
+            <div *ngIf="getControl('correo')?.invalid && getControl('correo')?.touched" class="error-msg">
+              <small *ngIf="getControl('correo')?.hasError('required')">Este campo es obligatorio.</small>
+              <small *ngIf="getControl('correo')?.hasError('email')">Correo inválido.</small>
+            </div>
+          </div>
+
+          <div class="form-campo">
+            <label>Teléfono:</label>
+            <input type="text" formControlName="telefono" required pattern="^[0-9]{7,15}$">
+            <div *ngIf="getControl('telefono')?.invalid && getControl('telefono')?.touched" class="error-msg">
+              <small *ngIf="getControl('telefono')?.hasError('required')">Este campo es obligatorio.</small>
+              <small *ngIf="getControl('telefono')?.hasError('pattern')">Teléfono inválido (7 a 15 dígitos).</small>
+            </div>
+          </div>
+
+          <div class="form-campo">
+            <label>Dirección:</label>
+            <input type="text" formControlName="direccion">
+          </div>
+
+          <div class="form-campo">
+            <label>Ciudad:</label>
+            <input type="text" formControlName="ciudad">
+          </div>
+
+          <div class="form-campo">
+            <label>Fecha de Ingreso:</label>
+            <input type="text" formControlName="fechaIngreso">
+          </div>
+
+          <div class="form-campo">
+            <label>Edad:</label>
+            <input type="number" formControlName="edad">
+            <div *ngIf="getControl('edad')?.invalid && getControl('edad')?.touched" class="error-msg">
+              <small *ngIf="getControl('edad')?.hasError('min')">Edad mínima: 18 años.</small>
+              <small *ngIf="getControl('edad')?.hasError('max')">Edad máxima: 65 años.</small>
+            </div>
+          </div>
+
+          <div class="form-campo">
+            <label>Cargo:</label>
+            <input type="text" formControlName="cargo">
+          </div>
+
+          <div class="form-campo">
+            <label>Turno de Trabajo:</label>
+            <input type="text" formControlName="turnoTrabajo">
+          </div>
+
+          <div class="form-campo">
+            <label>Salario:</label>
+            <input type="number" formControlName="salario">
+            <div *ngIf="getControl('salario')?.invalid && getControl('salario')?.touched" class="error-msg">
+              <small *ngIf="getControl('salario')?.hasError('min')">El salario no puede ser negativo.</small>
+            </div>
+          </div>
+
+          <button type="submit" [disabled]="empleadoForm.invalid">Actualizar</button>
+          <button type="button" (click)="eliminarEmpleado()" class="btn-eliminar">Eliminar</button>
+        </form>
+      </div>
+
+      <div *ngIf="mensaje" style="color: rgb(239, 5, 5); margin-top: 1rem;">
+        {{ mensaje }}
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    ClínicaApp - Sistema de Gestión de recursos humanos
+  </footer>
+</div>
