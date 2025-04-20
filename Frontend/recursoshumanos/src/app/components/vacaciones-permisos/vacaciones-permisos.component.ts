@@ -5,15 +5,16 @@ import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { FooterComponent } from '../footer/footer.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-vacaciones-permisos',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, HttpClientModule],
+  imports: [ReactiveFormsModule, CommonModule, HttpClientModule, RouterModule],
   templateUrl: './vacaciones-permisos.component.html',
   styleUrl: './vacaciones-permisos.component.css'
 })
-export class PermisosComponent implements OnInit {
+export class VacacionesPermisosComponent implements OnInit {
   permisos: any[] = [];
 
   constructor(private VacacionesPermisosService: VacacionesPermisosService) {}

@@ -1,0 +1,28 @@
+<div class="main-container">
+    <!-- Navbar -->
+    <nav>
+      <a routerLink="/menu-empleado">Clinica</a>
+      <div class="nav-item">Jornada Laboral</div>
+    </nav>
+  
+    <!-- Contenedor principal -->
+    <div class="content-container">
+      <div class="registro-form">
+        <h2>Registro de Jornada</h2>
+  
+        <div class="botones-container">
+          <button (click)="registrarEntrada()">Registrar Hora de Entrada</button>
+          <button (click)="registrarSalida()">Registrar Hora de Salida</button>
+          <button (click)="borrarEntrada()">Borrar Entrada</button>
+        </div>
+  
+        <p class="mensaje" *ngIf="mensaje">{{ mensaje }}</p>
+      </div>
+    </div>
+  
+    <!-- Footer -->
+    <footer class="footer">
+      ClínicaApp - Sistema de Gestión de Recursos Humanos
+    </footer>
+  </div>
+  

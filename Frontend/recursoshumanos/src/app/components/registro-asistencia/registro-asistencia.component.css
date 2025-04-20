@@ -1,0 +1,103 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  /* Navbar */
+  nav {
+    background-color: #141E54;
+    color: white;
+    margin: 0;
+    padding: 1rem;
+    display: flex;
+    gap: 2rem;
+    font-weight: bold;
+    width: 100%;
+  }
+  
+  .nav-item {
+    cursor: pointer;
+  }
+  
+  /* Contenedor de contenido principal */
+  .content-container {
+    flex: 1;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+  }
+  
+  /* Formulario de registro */
+  .registro-form {
+    background-color: #ffffff;
+    padding: 30px;
+    border: 1px solid #888;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .registro-form h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  
+  /* Botones en fila */
+  .botones-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  
+  .botones-container button {
+    padding: 12px 16px;
+    background-color: #803939;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    min-width: 150px;
+  }
+  
+  .botones-container button:hover {
+    background-color: #692f2f;
+  }
+  
+  /* Mensaje */
+  .mensaje {
+    font-size: 16px;
+    margin-top: 10px;
+    color: #333;
+  }
+  
+  /* Footer */
+  .footer {
+    background-color: #141E54;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    border: none;
+    box-shadow: none;
+    height: 50px;
+  }
+  a {
+    text-decoration: none;
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }

@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { cedulaUnicaValidator } from '../../validators/cedula-unica.validator';
 import { RegistroEmpleadoResponse } from '../../interfaces/registro-empleado-response';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { RegistroEmpleadoResponse } from '../../interfaces/registro-empleado-res
   templateUrl: './registrar-empleado.component.html',
   styleUrl: './registrar-empleado.component.css',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, HttpClientModule]
+  imports: [ReactiveFormsModule, CommonModule, HttpClientModule, RouterModule]
 })
 export class RegistrarEmpleadoComponent {
   empleadoForm: FormGroup;

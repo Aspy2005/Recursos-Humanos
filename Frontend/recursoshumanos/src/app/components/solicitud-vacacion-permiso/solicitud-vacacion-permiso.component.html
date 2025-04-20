@@ -1,0 +1,52 @@
+<div class="main-container">
+    <nav>
+        <a routerLink="/menu-empleado">Clinica</a>
+        <div class="nav-item">Solicitud de Permisos</div>
+    </nav>
+  
+    <div class="content-container">
+      <div class="form-box">
+        <h2>Solicitar Vacaciones o Permisos</h2>
+  
+        <form [formGroup]="solicitudForm" (ngSubmit)="enviarSolicitud()">
+          <select formControlName="tipo" required class="w-full border rounded px-3 py-2 mb-4">
+            <option value="" disabled selected>Selecciona un tipo</option>
+            <option value="Vacaciones">Vacaciones</option>
+            <option value="Permiso">Permiso</option>
+          </select>
+  
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+            <div>
+              <label for="fechaInicio" class="block font-semibold">Fecha de Inicio</label>
+              <input id="fechaInicio" type="date" formControlName="fechaInicio" class="w-full border rounded px-3 py-2" required>
+            </div>
+  
+            <div>
+              <label for="fechaFin" class="block font-semibold">Fecha de Fin</label>
+              <input id="fechaFin" type="date" formControlName="fechaFin" class="w-full border rounded px-3 py-2" required>
+            </div>
+  
+            <div>
+              <label for="motivo" class="block font-semibold">Motivo</label>
+              <input id="motivo" type="text" formControlName="motivo" class="w-full border rounded px-3 py-2" required>
+            </div>
+  
+            <div>
+              <label for="observaciones" class="block font-semibold">Observaciones</label>
+              <textarea id="observaciones" formControlName="observaciones" rows="2" class="w-full border rounded px-3 py-2"></textarea>
+            </div>
+          </div>
+  
+          <button type="submit" [disabled]="solicitudForm.invalid" class="btn-submit mt-4">Enviar Solicitud</button>
+        </form>
+  
+        <p class="mensaje" *ngIf="mensaje">{{ mensaje }}</p>
+        <p class="error" *ngIf="error">{{ error }}</p>
+      </div>
+    </div>
+  
+    <footer class="footer">
+      ClínicaApp - Sistema de Gestión de Recursos Humanos
+    </footer>
+  </div>
+  

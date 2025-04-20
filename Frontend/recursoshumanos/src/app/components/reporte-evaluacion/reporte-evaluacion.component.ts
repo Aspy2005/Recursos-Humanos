@@ -5,13 +5,14 @@ import { ReporteEvaluacionService } from './../../services/reporte-evaluacion.se
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-reporte-evaluacion',
   standalone: true,
   templateUrl: './reporte-evaluacion.component.html',
   styleUrls: ['./reporte-evaluacion.component.css'],
-  imports: [ReactiveFormsModule, CommonModule, HttpClientModule]
+  imports: [ReactiveFormsModule, CommonModule, HttpClientModule, RouterModule]
 })
 export class ReporteEvaluacionComponent implements OnInit {
   evaluacionForm!: FormGroup;

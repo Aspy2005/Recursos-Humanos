@@ -3,11 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';  // Importa ReactiveFormsModule y validadores
 import { CommonModule } from '@angular/common';
 import { EmpleadoService } from './../../services/empleado.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-gestor-empleado',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule],  // Asegúrate de importar ReactiveFormsModule
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, RouterModule],  // Asegúrate de importar ReactiveFormsModule
   templateUrl: './gestor-empleado.component.html',
   styleUrls: ['./gestor-empleado.component.css']
 })

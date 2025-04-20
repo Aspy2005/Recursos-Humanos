@@ -240,4 +240,10 @@ button[type="submit"]:disabled {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}a {
+  text-decoration: none;
+  color: white;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.3s;
 }
