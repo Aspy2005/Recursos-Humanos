@@ -1,0 +1,69 @@
+<div class="main-container">
+    <!-- Navbar -->
+    <nav>
+        <a routerLink="/menu-rh">Clinica</a>
+        <div class="nav-item">Generar Reporte</div>
+    </nav>
+  
+    <!-- Contenedor principal para generar reporte -->
+    <div class="container">
+      <h2>Generar Reporte</h2>
+  
+      <form (ngSubmit)="generar()" class="form">
+        <div class="form-group">
+          <label for="idEmpleado">ID Empleado</label>
+          <input
+            type="text"
+            id="idEmpleado"
+            [(ngModel)]="data.idEmpleado"
+            name="idEmpleado"
+            class="form-control"
+            required
+            placeholder="Ingrese el ID del empleado"
+          />
+        </div>
+  
+        <div class="form-group">
+          <label for="tipo">Tipo de Reporte</label>
+          <select
+            id="tipo"
+            [(ngModel)]="data.tipo"
+            name="tipo"
+            class="form-control"
+            required
+          >
+            <option value="asistencia">Asistencia</option>
+            <option value="permiso">Vacaciones Y Permisos</option>
+            <option value="desempeno">Desempeño</option>
+          </select>
+        </div>
+  
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary" [disabled]="!data.idEmpleado">
+            Generar Reporte
+          </button>
+        </div>
+      </form>
+  
+      <div *ngIf="reporte" class="reporte-container">
+        <h3>Reporte Generado</h3>
+        <p><strong>Tipo de Reporte:</strong> {{ reporte.tipo }}</p>
+        <p><strong>Empleado:</strong> {{ reporte.idEmpleado }}</p>
+        <p><strong>Fecha de Generación:</strong> {{ reporte.fechaGeneracion | date }}</p>
+  
+        <button (click)="descargar()" class="btn btn-success">
+          Descargar Reporte
+        </button>
+      </div>
+  
+      <div *ngIf="!reporte && !data.idEmpleado" class="alert alert-warning">
+        Por favor, ingresa un ID de empleado para generar el reporte.
+      </div>
+    </div>
+  
+    <!-- Footer -->
+    <footer class="footer">
+      ClínicaApp - Sistema de Gestión de recursos humanos
+    </footer>
+  </div>
+  

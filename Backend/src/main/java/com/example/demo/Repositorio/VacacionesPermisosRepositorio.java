@@ -10,4 +10,6 @@ import com.example.demo.modelo.VacacionesPermisos;
 @Repository
 public interface VacacionesPermisosRepositorio extends JpaRepository<VacacionesPermisos, Integer> {
     List<VacacionesPermisos> findAllByOrderByFechaInicioDesc();
+    List<VacacionesPermisos> findByEmpleado_CedulaEmpleado(String cedulaEmpleado);
+
 }

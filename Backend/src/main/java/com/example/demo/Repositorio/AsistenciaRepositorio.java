@@ -13,4 +13,6 @@ public interface AsistenciaRepositorio extends JpaRepository<Asistencia, Integer
     List<Asistencia> findTop5ByEmpleadoCedulaEmpleadoOrderByFechaDesc(String cedulaEmpleado);
 
 	Optional<Asistencia> findByEmpleadoAndFecha(Empleado empleado, LocalDate hoy);
+
+	List<Asistencia> findByEmpleado_CedulaEmpleado(String idEmpleado);
 }

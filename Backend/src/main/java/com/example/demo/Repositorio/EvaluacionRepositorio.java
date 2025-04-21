@@ -7,4 +7,6 @@ import com.example.demo.modelo.Evaluacion;
 public interface EvaluacionRepositorio extends JpaRepository<Evaluacion, Integer> {
     // Método para obtener las últimas 5 evaluaciones de un empleado por su cédula
     List<Evaluacion> findTop5ByEmpleadoCedulaEmpleadoOrderByFechaDesc(String cedulaEmpleado);
+    List<Evaluacion> findByEmpleado_CedulaEmpleado(String cedulaEmpleado);
+
 }

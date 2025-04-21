@@ -13,6 +13,7 @@ import { RegistroAsistenciaComponent } from './components/registro-asistencia/re
 
 // Importa tu nuevo componente standalone
 import { SolicitudVacacionPermisoComponent } from './components/solicitud-vacacion-permiso/solicitud-vacacion-permiso.component';
+import { GenerarReporteComponent } from './components/generar-reporte/generar-reporte.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -27,6 +28,9 @@ export const routes: Routes = [
   
   // ✅ Ruta accesible por todos para solicitar vacaciones o permisos
   { path: 'solicitar-vacacion-permiso', component: SolicitudVacacionPermisoComponent },
+
+  { path: 'generar-reporte', component: GenerarReporteComponent, canActivate: [RoleGuard], data: { roles: ['personalRH'] } },
+
 
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
